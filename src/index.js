@@ -1,15 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import { HashRouter, Route } from 'react-router-dom';
+
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+import 'bootstrap/dist/css/bootstrap.css';
+
+import Signin from './components/Signin';
+import Signup from './components/Signup';
+import Home from './components/Home';
+import HeaderApp from './components/HeaderApp';
+
+ReactDOM.render(<HeaderApp />, document.getElementById('header'));
+ReactDOM.render(<HashRouter>
+      <div>
+        <Route exact path="/" component={Signin} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/home" component={Home} />
+      </div>
+   </HashRouter >, document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

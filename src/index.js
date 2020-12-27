@@ -6,16 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import Signin from './components/Signin';
-import Signup from './components/Signup';
 import Home from './components/Home';
-import HeaderApp from './components/HeaderApp';
+import App from './components/App';
 
-ReactDOM.render(<HeaderApp />, document.getElementById('header'));
 ReactDOM.render(<HashRouter>
       <div>
-        <Route exact path="/" component={Signin} />
-        <Route path="/signup" component={Signup} />
+        <Route exact path="/" component={App} />
         <Route path="/home" component={Home} />
       </div>
    </HashRouter >, document.getElementById('root'));

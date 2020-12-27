@@ -1,0 +1,58 @@
+import React, { useState } from 'react';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Media, Row, Col, Container, Alert } from 'reactstrap';
+import PostList from './posts/PostList';
+
+import { GoogleLogin } from 'react-google-login';
+
+import MyPlaceHolderPicture from '../images/lynx.png';
+var imgStyle = {
+  maxWidth: "85px",
+};
+
+export default function App(props){
+
+  const [loginMessage, setLoginMessage] = useState(null);
+
+  const responseGoogleSuccess = (googleUser) => {
+    var profile = googleUser.getBasicProfile();
+  
+    sessionStorage.setItem('name', profile.getName());
+    sessionStorage.setItem('email', profile.getEmail());
+    sessionStorage.setItem('image', profile.getImageUrl());
+  
+    props.history.push("/home");
+  }
+
+  const responseGoogleFailure = (response) => {
+    setLoginMessage(<Alert color="danger">Inicio de sesión incorrecto. Inténtelo de nuevo</Alert>);
+  }
+
+  return(
+    <Container>
+      <Row>
+        <Col>
+          <Navbar color="primary" light expand="md">
+            <NavbarBrand><h4 className="text-white">My Twitter Clone</h4></NavbarBrand>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                {loginMessage}
+                <GoogleLogin
+                  clientId="654966311312-8770o12ejcc7ml1qdl685is8vr6rsu9r.apps.googleusercontent.com"
+                  buttonText="Login with Google"
+                  theme='dark'
+                  onSuccess={responseGoogleSuccess}
+                  onFailure={responseGoogleFailure}
+                />
+              </NavItem>
+            </Nav>
+          </Navbar>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs= "12">
+          <PostList/>
+        </Col>
+      </Row>
+    </Container>
+  );
+}

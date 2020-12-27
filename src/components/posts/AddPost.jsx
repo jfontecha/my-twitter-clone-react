@@ -38,7 +38,7 @@ export default function AddPost(props){
             <Label for="aDescripcion">Descripción</Label>
             <Input style={{height: '200px'}} type="textarea" name="description" value={description} id="aDescripcion" placeholder="Introduce una descripción" onChange={(e) => setDescription(e.target.value)}/>
           </FormGroup>
-          <Button onClick={addPost}>Añadir</Button>
+          <Button color="primary" onClick={addPost}>Añadir</Button>
         </Form>
       </Card>
     </div>

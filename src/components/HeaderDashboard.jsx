@@ -2,34 +2,31 @@ import React, { useState } from 'react';
 import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink, Tooltip } from 'reactstrap';
 
 import { FaSignOutAlt, FaCogs } from 'react-icons/fa';
+import { GoogleLogout } from 'react-google-login';
 
 export default function HeaderDashboard(props){
 
-  const [tooltipOpen, setTooltipOpen] = useState(false);
-
   return (
-    <Navbar color="warning" light expand="md">
-      <NavbarBrand><FaCogs /> Dashboard</NavbarBrand>
+    <Navbar color="primary" light expand="md">
+      <NavbarBrand><FaCogs color="white"/><span className="text-white"><strong> Dashboard:</strong> {sessionStorage.getItem('name')}</span></NavbarBrand>
       <Collapse navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink href="#" onClick={() => props.onShow(1)}>Todos los Posts</NavLink>
+            <NavLink href="#" onClick={() => props.onShow(1)}><span className="text-white">Todos los Posts</span></NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#" onClick={() => props.onShow(2)}>Mis Posts</NavLink>
+            <NavLink href="#" onClick={() => props.onShow(2)}><span className="text-white">Mis Posts</span></NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="#" onClick={() => props.onShow(3)}>{sessionStorage.getItem('username')}</NavLink>
+            <GoogleLogout
+              clientId="654966311312-8770o12ejcc7ml1qdl685is8vr6rsu9r.apps.googleusercontent.com"
+              buttonText="Logout"
+              theme='dark'
+              onLogoutSuccess={props.onLogout}
+            />
           </NavItem>
-          <NavItem>
-            <NavLink href="#" id="tooltip_logout" onClick={ props.onLogout }><FaSignOutAlt />
-            <Tooltip placement="bottom" isOpen={tooltipOpen} target="tooltip_logout" toggle={() => setTooltipOpen(!tooltipOpen)}>
-              Salir
-            </Tooltip>
-          </NavLink>
-        </NavItem>
-      </Nav>
-    </Collapse>
+        </Nav>
+      </Collapse>
   </Navbar>
   );
 }

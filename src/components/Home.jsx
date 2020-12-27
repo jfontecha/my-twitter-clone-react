@@ -19,13 +19,10 @@ export default function Home(props){
       setShow(<PostList />);
     }else if (option === 2){
       setShow(<MyPostList />);
-    }else if (option === 3){
-        //TODO Show UserEdit component!
-        alert('Usuario: '+sessionStorage.getItem('username')+"\nRol: "+sessionStorage.getItem('role'));
     }
   }
 
-  if (sessionStorage.getItem("username") === null){
+  if (sessionStorage.getItem("name") === null){
     props.history.push("/");
   }
   else{

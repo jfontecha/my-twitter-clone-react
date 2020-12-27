@@ -81,7 +81,7 @@ export default function MyPostList(props){
       {showDeleteModal}
       <Row>
         <Col xs="7">
-          <CardTitle tag="center"><Alert color="info"><strong>Mis Posts publicados </strong><Badge pill>{posts.length}</Badge></Alert></CardTitle>
+          <CardTitle tag="center"><Alert color="primary"><strong>Mis Posts publicados </strong><Badge pill>{posts.length}</Badge></Alert></CardTitle>
           <Table>
             <tbody>
               { posts.map((post, index) => {

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, CardTitle, Badge, CardBody, Table, Alert } from 'reactstrap';
 
 import { FaFeather } from 'react-icons/fa';
+import { AiOutlineHeart, AiOutlineRetweet } from 'react-icons/ai';
+import { BsChat, BsUpload } from "react-icons/bs";
 
 import { getAllPosts } from "../../utils/apicalls.js";
 import { getDateInStrFormat } from "../../utils/utils.js";
@@ -22,33 +24,40 @@ export default function PostList(){
 
   return (
     <div>
-      <CardTitle tag="center"><Alert color="info"><strong>Posts publicados </strong><Badge pill>{posts.length}</Badge></Alert></CardTitle>
+      <CardTitle tag="center"><Alert color="primary"><strong>Posts publicados </strong><Badge pill>{posts.length}</Badge></Alert></CardTitle>
       <Table>
         <tbody>
           { posts.map((post, index) => {
             return(
               <div>
-                <Alert color="dark">
                   <Row>
                     <Col>
-                      <CardTitle tag="h5"><FaFeather /> {post.title}</CardTitle>
                       <Card>
                         <CardBody>
+                          <Row><Col><strong><FaFeather /> {post.user.fullname}</strong></Col></Row>
                           <Row>
                             <Col>
                               {post.description}
                             </Col>
                           </Row>
                           <Row>
+                            <Col align="left" xs= "5">
+                              <Row>
+                                <Col xs="2"><BsChat /></Col>
+                                <Col xs="2"><AiOutlineRetweet /><small>{Math.floor((Math.random() * 10) + 1)}</small></Col>
+                                <Col xs="2"><AiOutlineHeart /><small>{Math.floor((Math.random() * 100) + 1)}</small></Col>
+                                <Col xs="2"><BsUpload/></Col>
+                              </Row>
+                            </Col>
                             <Col align="right">
-                              <small>{getDateInStrFormat(new Date(post.publicationdate))} - {post.user.username}</small>
+                              <small>{getDateInStrFormat(new Date(post.publicationdate))} - @{post.user.username}</small>
                             </Col>
                           </Row>
                         </CardBody>
                       </Card>
                     </Col>
                   </Row>
-                </Alert>
+                  <br/>
               </div>)
             })}
           </tbody>

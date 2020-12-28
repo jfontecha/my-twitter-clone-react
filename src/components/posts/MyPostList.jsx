@@ -95,7 +95,7 @@ export default function MyPostList(props){
                     <Col>
                       <Card>
                         <CardBody>
-                          <Row><Col><strong><img src={post.image} /> {post.user}</strong></Col>
+                          <Row><Col><strong><img src={post.image} alt="Img"/> {post.user}</strong></Col>
                                <Col align="right">
                                   <Button outline onClick={() => handleShowEdit(post)}><FaEdit /></Button>
                                   {' '}

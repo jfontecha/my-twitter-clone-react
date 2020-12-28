@@ -37,7 +37,7 @@ export default function EditPost(props){
             <Label for="aDescripcion">Mensaje</Label>
             <Input style={{height: '200px'}} type="textarea" name="message" id="aDescripcion" placeholder="Introduce un mensaje" value={message} onChange={(e) => setMessage(e.target.value)}/>
           </FormGroup>
-            <Button onClick={editPost}>Actualizar</Button>
+            <Button color="primary" onClick={editPost}>Actualizar</Button>
         </Form>
       </Card>
     </div>

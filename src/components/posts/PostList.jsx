@@ -34,7 +34,7 @@ export default function PostList(){
                     <Col>
                       <Card>
                         <CardBody>
-                          <Row><Col><strong><img src={post.image} /> {post.user}</strong></Col></Row>
+                          <Row><Col><strong><img src={post.image} alt="Img"/> {post.user}</strong></Col></Row>
                           <Row>
                             <Col>
                               {post.message}

@@ -8,7 +8,7 @@ import PostList from './posts/PostList';
 export default function Home(props){
 
   const [show, setShow] = useState(<PostList />);
-
+ 
   const handleLogout = () => {
     sessionStorage.clear();
     props.history.push("/");

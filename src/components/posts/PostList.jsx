@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, CardTitle, Badge, CardBody, Table, Alert } from 'reactstrap';
+import '../../styles.css';
 
-import { FaFeather } from 'react-icons/fa';
 import { AiOutlineHeart, AiOutlineRetweet } from 'react-icons/ai';
 import { BsChat, BsUpload } from "react-icons/bs";
 
@@ -34,10 +34,10 @@ export default function PostList(){
                     <Col>
                       <Card>
                         <CardBody>
-                          <Row><Col><strong><FaFeather /> {post.user.fullname}</strong></Col></Row>
+                          <Row><Col><strong><img src={post.image} /> {post.user}</strong></Col></Row>
                           <Row>
                             <Col>
-                              {post.description}
+                              {post.message}
                             </Col>
                           </Row>
                           <Row>
@@ -50,7 +50,7 @@ export default function PostList(){
                               </Row>
                             </Col>
                             <Col align="right">
-                              <small>{getDateInStrFormat(new Date(post.publicationdate))} - @{post.user.username}</small>
+                              <small>{getDateInStrFormat(new Date(post.publicationdate))}</small>
                             </Col>
                           </Row>
                         </CardBody>

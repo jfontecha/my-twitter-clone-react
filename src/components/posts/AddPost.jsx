@@ -5,13 +5,12 @@ import { postNewPost } from "../../utils/apicalls.js";
 
 export default function AddPost(props){
 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [message, setMessage] = useState('');
 
   const addPost = (e) => {
     e.preventDefault();
     //Save post in database with post api call
-    postNewPost(sessionStorage.getItem('iduser'), title, description)
+    postNewPost(sessionStorage.getItem('email'),sessionStorage.getItem('name'), sessionStorage.getItem('image'), message)
       .then((res) => checkPOSTNewPost(res));
   }
 
@@ -31,12 +30,8 @@ export default function AddPost(props){
         <CardTitle tag="h5">Añadir un nuevo post</CardTitle>
         <Form>
           <FormGroup>
-            <Label for="aTitulo">Titulo</Label>
-            <Input type="text" name="title" value={title} id="aTitulo" placeholder="Introduce un título" onChange={(e) => setTitle(e.target.value)} required/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="aDescripcion">Descripción</Label>
-            <Input style={{height: '200px'}} type="textarea" name="description" value={description} id="aDescripcion" placeholder="Introduce una descripción" onChange={(e) => setDescription(e.target.value)}/>
+            <Label for="aMensaje">Mensaje</Label>
+            <Input style={{height: '200px'}} type="textarea" name="message" value={message} id="aMensaje" placeholder="Introduce un mensaje" onChange={(e) => setMessage(e.target.value)}/>
           </FormGroup>
           <Button color="primary" onClick={addPost}>Añadir</Button>
         </Form>

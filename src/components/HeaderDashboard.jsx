@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink, Tooltip } from 'reactstrap';
+import React from 'react';
+import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
 
-import { FaSignOutAlt, FaCogs } from 'react-icons/fa';
+import { FaCogs } from 'react-icons/fa';
 import { GoogleLogout } from 'react-google-login';
 
 export default function HeaderDashboard(props){

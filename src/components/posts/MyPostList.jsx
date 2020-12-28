@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
+import '../../styles.css';
 
-import { Row, Col, Card, CardTitle, Badge, UncontrolledCollapse, CardBody,
-Table, Alert, Button, Nav, NavItem, NavLink, Navbar, NavbarBrand, TabContent,
+
+import { Row, Col, Card, CardTitle, Badge, CardBody,
+Table, Alert, Button, Nav, NavItem, NavLink, TabContent,
 TabPane, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
-import { FaFeather, FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { AiOutlineHeart, AiOutlineRetweet } from 'react-icons/ai';
+import { BsChat, BsUpload } from "react-icons/bs";
 
 import { getMyPosts, deletePost } from "../../utils/apicalls.js";
 import { getDateInStrFormat } from "../../utils/utils.js";
@@ -21,7 +25,7 @@ export default function MyPostList(props){
   const [showDeleteModal, setShowDeleteModal] = useState(null);
 
   const getPosts = () => {
-      getMyPosts(sessionStorage.getItem('iduser')).then((posts) => {
+      getMyPosts(sessionStorage.getItem('email')).then((posts) => {
           setPosts(posts);
       });
   }
@@ -40,10 +44,10 @@ export default function MyPostList(props){
       <Modal isOpen="true" className={props.className}>
         <ModalHeader>Eliminar post</ModalHeader>
         <ModalBody>
-          ¿Está seguro que desea eliminar el post <strong>{post.title}</strong>?
+          Se va a eliminar el post:<br/><small><strong>{post.message}</strong></small>
         </ModalBody>
         <ModalFooter>
-          <Button color="warning" onClick={() => deletePostSel(post)}>Eliminar</Button>{' '}
+          <Button color="primary" onClick={() => deletePostSel(post)}>Eliminar</Button>{' '}
           <Button color="secondary" onClick={() => setShowDeleteModal(null)}>Cancelar</Button>
         </ModalFooter>
       </Modal>
@@ -86,34 +90,42 @@ export default function MyPostList(props){
             <tbody>
               { posts.map((post, index) => {
                 return(<div>
+                  <div>
                   <Row>
                     <Col>
-                      <Navbar expand="md">
-                        <NavbarBrand href="#" id={"toggler"+index}><h5><FaFeather /> {post.title}</h5></NavbarBrand>
-                        <Nav className="ml-auto" navbar>
-                          <NavItem>
-                            <NavLink>
-                              <Button outline onClick={() => handleShowEdit(post)}><FaEdit /></Button>
-                              {' '}
-                              <Button outline onClick={() => askForDelete(post)}><FaTrashAlt /></Button>
-                            </NavLink>
-                          </NavItem>
-                        </Nav>
-                      </Navbar>
+                      <Card>
+                        <CardBody>
+                          <Row><Col><strong><img src={post.image} /> {post.user}</strong></Col>
+                               <Col align="right">
+                                  <Button outline onClick={() => handleShowEdit(post)}><FaEdit /></Button>
+                                  {' '}
+                                  <Button outline onClick={() => askForDelete(post)}><FaTrashAlt /></Button>
+                                </Col>
+                                </Row>
+                          <Row>
+                            <Col>
+                              {post.message}
+                            </Col>
+                          </Row>
+                          <Row>
+                            <Col align="left" xs= "8">
+                              <Row>
+                                <Col xs="2"><BsChat /></Col>
+                                <Col xs="2"><AiOutlineRetweet /><small>{Math.floor((Math.random() * 10) + 1)}</small></Col>
+                                <Col xs="2"><AiOutlineHeart /><small>{Math.floor((Math.random() * 100) + 1)}</small></Col>
+                                <Col xs="2"><BsUpload/></Col>
+                              </Row>
+                            </Col>
+                            <Col align="right">
+                              <small>{getDateInStrFormat(new Date(post.publicationdate))}</small>
+                            </Col>
+                          </Row>
+                        </CardBody>
+                      </Card>
                     </Col>
                   </Row>
-                  <Row>
-                    <Col>
-                      <UncontrolledCollapse toggler={"#toggler"+index}>
-                        <Card>
-                          <CardBody>
-                            <Row><Col>{post.description}</Col></Row>
-                            <Row><Col align="right"><small>{getDateInStrFormat(new Date(post.publicationdate))} - {post.user.username}</small></Col></Row>
-                          </CardBody>
-                        </Card>
-                      </UncontrolledCollapse>
-                    </Col>
-                  </Row>
+                  <br/>
+              </div>
                 </div>)
               })}
             </tbody>

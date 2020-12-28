@@ -1,53 +1,32 @@
 import API from './api';
 
 export {
-  login,
   getAllPosts,
   getMyPosts,
   postNewPost,
   putExistingPost,
-  deletePost,
-  postNewUser
+  deletePost
 };
-
-function login(username, password) {
-  return API.post('/users/signin', {
-    username,
-    password
-  }).then(result => result.data)
-  .catch(function(error){
-        //TODO When an error status is sent by server (also in the rest of calls!)
-  });
-}
 
 function getAllPosts() {
   return API.get('/posts').then(res => res.data);
 }
 
-function getMyPosts(iduser) {
-  return API.get('/posts/all/'+iduser).then(res => res.data);
+function getMyPosts(email) {
+  return API.get('/posts/all/'+email).then(res => res.data);
 }
 
-function postNewUser(username, password, fullname, email, role) {
-  return API.post('/users', {
-    username,
-    password,
-    fullname,
-    email,
-    role }).then(result => result.data);
-}
-
-function postNewPost(iduser, title, description) {
+function postNewPost(email, user, image, message) {
   return API.post('/posts', {
-    iduser,
-    title,
-    description}).then(result => result.data);
+    email,
+    user,
+    image,
+    message}).then(result => result.data);
 }
 
-function putExistingPost(idpost, title, description) {
+function putExistingPost(idpost, message) {
   return API.put('/posts/'+idpost, {
-    title,
-    description}).then(result => result.data);
+    message}).then(result => result.data);
 }
 
 function deletePost(idpost) {

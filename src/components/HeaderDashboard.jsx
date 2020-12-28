@@ -3,6 +3,7 @@ import { Collapse, Navbar, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap
 
 import { FaCogs } from 'react-icons/fa';
 import { GoogleLogout } from 'react-google-login';
+import config from '../config.js';
 
 export default function HeaderDashboard(props){
 
@@ -19,7 +20,7 @@ export default function HeaderDashboard(props){
           </NavItem>
           <NavItem>
             <GoogleLogout
-              clientId="654966311312-8770o12ejcc7ml1qdl685is8vr6rsu9r.apps.googleusercontent.com"
+              clientId={config.clientID}
               buttonText="Logout"
               theme='dark'
               onLogoutSuccess={props.onLogout}

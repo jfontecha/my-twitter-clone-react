@@ -3,6 +3,7 @@ import { Navbar, NavbarBrand, Nav, NavItem, Media, Row, Col, Container, Alert } 
 import PostList from './posts/PostList';
 
 import { GoogleLogin } from 'react-google-login';
+import config from '../config.js';
 
 import MyPlaceBird from '../images/bird.png';
 var imgStyle = {
@@ -37,7 +38,7 @@ export default function App(props){
               <NavItem>
                 {loginMessage}
                 <GoogleLogin
-                  clientId="654966311312-8770o12ejcc7ml1qdl685is8vr6rsu9r.apps.googleusercontent.com"
+                  clientId={config.clientID}
                   buttonText="Login with Google"
                   theme='dark'
                   onSuccess={responseGoogleSuccess}
